@@ -21,11 +21,26 @@ function handleEventFormSubmit(event) {
 }
 
 function localStorageRetr() {
-  var currentHour = day.hour()
-  // grabs local storage and displays on website
+
+  // for loop for timeblocks info from local storage
   for (let i = 9; i < 18; i++) {
     var blockStorage= localStorage.getItem("hour-"+i)
     $("#hour-"+i).children("textarea").val(blockStorage)
+    
+  }
+}
+
+function getColors(){
+  var currentHour = dayjs().hour()
+  // for loop for colors to change with present future and past 
+  for (let i = 9; i < 18; i++) {
+    if(i < currentHour){
+      $("#hour-"+i).addClass("past")
+    }else if( i === currentHour){
+      $("#hour-"+i).addClass("present")
+    }else{
+      $("#hour-"+i).addClass("future")
+    }
   }
 }
 
@@ -34,7 +49,7 @@ localStorageRetr()
 function displyDay() {
   var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
   currentDay.text(rightNow);
-  //localStorageRetr()
+  getColors()
 }
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
