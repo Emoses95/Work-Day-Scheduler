@@ -1,31 +1,23 @@
 var currentDay = $('#currentDay');
-var 
+
+// calling diplay for current time
+setInterval(displyDay,1000) 
+
+
+//Button onclick
+$(".saveBtn").on("click",handleEventFormSubmit)
 
 // Adds event to local storage and prints the event data
 function handleEventFormSubmit(event){
   event.preventDefault();
 
   // read user input from the timeblock
-  var hour9= timeblockInputEl.val().trim();
-  var hour10= timeblockInputEl.val().trim();
-  var hour11= timeblockInputEl.val().trim(); 
+   var textareaData = $(this).siblings("textarea").val()
+   var hourBlock = $(this).parent().attr("id")
+    console.log(textareaData,hourBlock)
 
-var newhour= {
-  timeblock1: hour9,
-  timeblock2: hour10,
-  timeblock3: hour11,
-};
-
-// Add timeblocks to local storage
-var timeblocks= readTimeblocksFromStorage();
-timeblocks.push(newTimeblock);
-saveTimeblockToStorage(timeblocks);
-
-// print project data
-printTimeblockData();
-
-// clear the form inputs
-timeblockInputEl.val('');
+    // local storage 
+    localStorage.setItem(hourBlock,textareaData)
 }
 
 
